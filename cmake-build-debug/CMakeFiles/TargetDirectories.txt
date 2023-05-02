@@ -1,0 +1,6 @@
+/home/aitor/Projects/kubeshm-tests/cmake-build-debug/CMakeFiles/edit_cache.dir
+/home/aitor/Projects/kubeshm-tests/cmake-build-debug/CMakeFiles/rebuild_cache.dir
+/home/aitor/Projects/kubeshm-tests/cmake-build-debug/src/CMakeFiles/server.dir
+/home/aitor/Projects/kubeshm-tests/cmake-build-debug/src/CMakeFiles/client.dir
+/home/aitor/Projects/kubeshm-tests/cmake-build-debug/src/CMakeFiles/edit_cache.dir
+/home/aitor/Projects/kubeshm-tests/cmake-build-debug/src/CMakeFiles/rebuild_cache.dir
