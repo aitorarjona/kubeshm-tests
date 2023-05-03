@@ -5,18 +5,22 @@
 #ifndef KUBESHM_TESTS_SERVER_H
 #define KUBESHM_TESTS_SERVER_H
 
+#include <string>
+
+const std::string SOCKET_PATH = "/dev/shm/asio.localstream.socket";
+
 namespace gedsproxy {
     class Server {
     public:
         // define GEDSProxy constructor
-        Server() = delete;
+        Server() = default;
 
         // define GEDSProxy destructor
-        ~Server() = delete;
+        ~Server() = default;
 
         // define GEDSProxy public methods
         // Start method
-        void start();
+        void run();
     };
 }
 

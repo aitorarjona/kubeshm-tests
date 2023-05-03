@@ -77,15 +77,15 @@ build rebuild_cache: phony CMakeFiles/rebuild_cache.util
 
 build cmake_object_order_depends_target_server: phony || src/CMakeFiles/server.dir
 
-build src/CMakeFiles/server.dir/server1.cpp.o: CXX_COMPILER__server_Debug /home/aitor/Projects/kubeshm-tests/src/server1.cpp || cmake_object_order_depends_target_server
-  DEP_FILE = src/CMakeFiles/server.dir/server1.cpp.o.d
-  FLAGS = -g -fdiagnostics-color=always -std=gnu++20
+build src/CMakeFiles/server.dir/server_entrypoint.cpp.o: CXX_COMPILER__server_Debug /home/aitor/Projects/kubeshm-tests/src/server_entrypoint.cpp || cmake_object_order_depends_target_server
+  DEP_FILE = src/CMakeFiles/server.dir/server_entrypoint.cpp.o.d
+  FLAGS = -std=c++20 -Wall -pthread -lboost_serialization -g -fdiagnostics-color=always -std=gnu++20
   OBJECT_DIR = src/CMakeFiles/server.dir
   OBJECT_FILE_DIR = src/CMakeFiles/server.dir
 
 build src/CMakeFiles/server.dir/proxy/server.cpp.o: CXX_COMPILER__server_Debug /home/aitor/Projects/kubeshm-tests/src/proxy/server.cpp || cmake_object_order_depends_target_server
   DEP_FILE = src/CMakeFiles/server.dir/proxy/server.cpp.o.d
-  FLAGS = -g -fdiagnostics-color=always -std=gnu++20
+  FLAGS = -std=c++20 -Wall -pthread -lboost_serialization -g -fdiagnostics-color=always -std=gnu++20
   OBJECT_DIR = src/CMakeFiles/server.dir
   OBJECT_FILE_DIR = src/CMakeFiles/server.dir/proxy
 
@@ -97,8 +97,8 @@ build src/CMakeFiles/server.dir/proxy/server.cpp.o: CXX_COMPILER__server_Debug /
 #############################################
 # Link the executable src/server
 
-build src/server: CXX_EXECUTABLE_LINKER__server_Debug src/CMakeFiles/server.dir/server1.cpp.o src/CMakeFiles/server.dir/proxy/server.cpp.o
-  FLAGS = -g
+build src/server: CXX_EXECUTABLE_LINKER__server_Debug src/CMakeFiles/server.dir/server_entrypoint.cpp.o src/CMakeFiles/server.dir/proxy/server.cpp.o
+  FLAGS = -std=c++20 -Wall -pthread -lboost_serialization -g
   OBJECT_DIR = src/CMakeFiles/server.dir
   POST_BUILD = :
   PRE_LINK = :
@@ -114,21 +114,27 @@ build src/server: CXX_EXECUTABLE_LINKER__server_Debug src/CMakeFiles/server.dir/
 
 build cmake_object_order_depends_target_client: phony || src/CMakeFiles/client.dir
 
-build src/CMakeFiles/client.dir/client2.cpp.o: CXX_COMPILER__client_Debug /home/aitor/Projects/kubeshm-tests/src/client2.cpp || cmake_object_order_depends_target_client
-  DEP_FILE = src/CMakeFiles/client.dir/client2.cpp.o.d
-  FLAGS = -g -fdiagnostics-color=always -std=gnu++20
+build src/CMakeFiles/client.dir/client_example.cpp.o: CXX_COMPILER__client_Debug /home/aitor/Projects/kubeshm-tests/src/client_example.cpp || cmake_object_order_depends_target_client
+  DEP_FILE = src/CMakeFiles/client.dir/client_example.cpp.o.d
+  FLAGS = -std=c++20 -Wall -pthread -lboost_serialization -g -fdiagnostics-color=always -std=gnu++20
   OBJECT_DIR = src/CMakeFiles/client.dir
   OBJECT_FILE_DIR = src/CMakeFiles/client.dir
 
 build src/CMakeFiles/client.dir/proxy/server.cpp.o: CXX_COMPILER__client_Debug /home/aitor/Projects/kubeshm-tests/src/proxy/server.cpp || cmake_object_order_depends_target_client
   DEP_FILE = src/CMakeFiles/client.dir/proxy/server.cpp.o.d
-  FLAGS = -g -fdiagnostics-color=always -std=gnu++20
+  FLAGS = -std=c++20 -Wall -pthread -lboost_serialization -g -fdiagnostics-color=always -std=gnu++20
   OBJECT_DIR = src/CMakeFiles/client.dir
   OBJECT_FILE_DIR = src/CMakeFiles/client.dir/proxy
 
 build src/CMakeFiles/client.dir/proxy/client.cpp.o: CXX_COMPILER__client_Debug /home/aitor/Projects/kubeshm-tests/src/proxy/client.cpp || cmake_object_order_depends_target_client
   DEP_FILE = src/CMakeFiles/client.dir/proxy/client.cpp.o.d
-  FLAGS = -g -fdiagnostics-color=always -std=gnu++20
+  FLAGS = -std=c++20 -Wall -pthread -lboost_serialization -g -fdiagnostics-color=always -std=gnu++20
+  OBJECT_DIR = src/CMakeFiles/client.dir
+  OBJECT_FILE_DIR = src/CMakeFiles/client.dir/proxy
+
+build src/CMakeFiles/client.dir/proxy/protocol.cpp.o: CXX_COMPILER__client_Debug /home/aitor/Projects/kubeshm-tests/src/proxy/protocol.cpp || cmake_object_order_depends_target_client
+  DEP_FILE = src/CMakeFiles/client.dir/proxy/protocol.cpp.o.d
+  FLAGS = -std=c++20 -Wall -pthread -lboost_serialization -g -fdiagnostics-color=always -std=gnu++20
   OBJECT_DIR = src/CMakeFiles/client.dir
   OBJECT_FILE_DIR = src/CMakeFiles/client.dir/proxy
 
@@ -140,8 +146,8 @@ build src/CMakeFiles/client.dir/proxy/client.cpp.o: CXX_COMPILER__client_Debug /
 #############################################
 # Link the executable src/client
 
-build src/client: CXX_EXECUTABLE_LINKER__client_Debug src/CMakeFiles/client.dir/client2.cpp.o src/CMakeFiles/client.dir/proxy/server.cpp.o src/CMakeFiles/client.dir/proxy/client.cpp.o
-  FLAGS = -g
+build src/client: CXX_EXECUTABLE_LINKER__client_Debug src/CMakeFiles/client.dir/client_example.cpp.o src/CMakeFiles/client.dir/proxy/server.cpp.o src/CMakeFiles/client.dir/proxy/client.cpp.o src/CMakeFiles/client.dir/proxy/protocol.cpp.o
+  FLAGS = -std=c++20 -Wall -pthread -lboost_serialization -g
   OBJECT_DIR = src/CMakeFiles/client.dir
   POST_BUILD = :
   PRE_LINK = :
@@ -202,14 +208,14 @@ build src/all: phony src/server src/client
 #############################################
 # Re-run CMake if any of its inputs changed.
 
-build build.ninja: RERUN_CMAKE | /home/aitor/Projects/kubeshm-tests/CMakeLists.txt /home/aitor/Projects/kubeshm-tests/src/CMakeLists.txt /opt/clion-2023.1.1/bin/cmake/linux/x64/share/cmake-3.25/Modules/CMakeCInformation.cmake /opt/clion-2023.1.1/bin/cmake/linux/x64/share/cmake-3.25/Modules/CMakeCXXInformation.cmake /opt/clion-2023.1.1/bin/cmake/linux/x64/share/cmake-3.25/Modules/CMakeCommonLanguageInclude.cmake /opt/clion-2023.1.1/bin/cmake/linux/x64/share/cmake-3.25/Modules/CMakeGenericSystem.cmake /opt/clion-2023.1.1/bin/cmake/linux/x64/share/cmake-3.25/Modules/CMakeInitializeConfigs.cmake /opt/clion-2023.1.1/bin/cmake/linux/x64/share/cmake-3.25/Modules/CMakeLanguageInformation.cmake /opt/clion-2023.1.1/bin/cmake/linux/x64/share/cmake-3.25/Modules/CMakeSystemSpecificInformation.cmake /opt/clion-2023.1.1/bin/cmake/linux/x64/share/cmake-3.25/Modules/CMakeSystemSpecificInitialize.cmake /opt/clion-2023.1.1/bin/cmake/linux/x64/share/cmake-3.25/Modules/Compiler/CMakeCommonCompilerMacros.cmake /opt/clion-2023.1.1/bin/cmake/linux/x64/share/cmake-3.25/Modules/Compiler/GNU-C.cmake /opt/clion-2023.1.1/bin/cmake/linux/x64/share/cmake-3.25/Modules/Compiler/GNU-CXX.cmake /opt/clion-2023.1.1/bin/cmake/linux/x64/share/cmake-3.25/Modules/Compiler/GNU.cmake /opt/clion-2023.1.1/bin/cmake/linux/x64/share/cmake-3.25/Modules/Platform/Linux-GNU-C.cmake /opt/clion-2023.1.1/bin/cmake/linux/x64/share/cmake-3.25/Modules/Platform/Linux-GNU-CXX.cmake /opt/clion-2023.1.1/bin/cmake/linux/x64/share/cmake-3.25/Modules/Platform/Linux-GNU.cmake /opt/clion-2023.1.1/bin/cmake/linux/x64/share/cmake-3.25/Modules/Platform/Linux.cmake /opt/clion-2023.1.1/bin/cmake/linux/x64/share/cmake-3.25/Modules/Platform/UnixPaths.cmake CMakeCache.txt CMakeFiles/3.25.2/CMakeCCompiler.cmake CMakeFiles/3.25.2/CMakeCXXCompiler.cmake CMakeFiles/3.25.2/CMakeSystem.cmake
+build build.ninja: RERUN_CMAKE | /home/aitor/Projects/kubeshm-tests/CMakeLists.txt /home/aitor/Projects/kubeshm-tests/src/CMakeLists.txt /opt/clion-2023.1.1/bin/cmake/linux/x64/share/cmake-3.25/Modules/CMakeCInformation.cmake /opt/clion-2023.1.1/bin/cmake/linux/x64/share/cmake-3.25/Modules/CMakeCXXInformation.cmake /opt/clion-2023.1.1/bin/cmake/linux/x64/share/cmake-3.25/Modules/CMakeCommonLanguageInclude.cmake /opt/clion-2023.1.1/bin/cmake/linux/x64/share/cmake-3.25/Modules/CMakeGenericSystem.cmake /opt/clion-2023.1.1/bin/cmake/linux/x64/share/cmake-3.25/Modules/CMakeInitializeConfigs.cmake /opt/clion-2023.1.1/bin/cmake/linux/x64/share/cmake-3.25/Modules/CMakeLanguageInformation.cmake /opt/clion-2023.1.1/bin/cmake/linux/x64/share/cmake-3.25/Modules/CMakeSystemSpecificInformation.cmake /opt/clion-2023.1.1/bin/cmake/linux/x64/share/cmake-3.25/Modules/CMakeSystemSpecificInitialize.cmake /opt/clion-2023.1.1/bin/cmake/linux/x64/share/cmake-3.25/Modules/Compiler/CMakeCommonCompilerMacros.cmake /opt/clion-2023.1.1/bin/cmake/linux/x64/share/cmake-3.25/Modules/Compiler/GNU-C.cmake /opt/clion-2023.1.1/bin/cmake/linux/x64/share/cmake-3.25/Modules/Compiler/GNU-CXX.cmake /opt/clion-2023.1.1/bin/cmake/linux/x64/share/cmake-3.25/Modules/Compiler/GNU.cmake /opt/clion-2023.1.1/bin/cmake/linux/x64/share/cmake-3.25/Modules/FindBoost.cmake /opt/clion-2023.1.1/bin/cmake/linux/x64/share/cmake-3.25/Modules/FindPackageHandleStandardArgs.cmake /opt/clion-2023.1.1/bin/cmake/linux/x64/share/cmake-3.25/Modules/FindPackageMessage.cmake /opt/clion-2023.1.1/bin/cmake/linux/x64/share/cmake-3.25/Modules/Platform/Linux-GNU-C.cmake /opt/clion-2023.1.1/bin/cmake/linux/x64/share/cmake-3.25/Modules/Platform/Linux-GNU-CXX.cmake /opt/clion-2023.1.1/bin/cmake/linux/x64/share/cmake-3.25/Modules/Platform/Linux-GNU.cmake /opt/clion-2023.1.1/bin/cmake/linux/x64/share/cmake-3.25/Modules/Platform/Linux.cmake /opt/clion-2023.1.1/bin/cmake/linux/x64/share/cmake-3.25/Modules/Platform/UnixPaths.cmake /usr/lib64/cmake/Boost-1.78.0/BoostConfig.cmake /usr/lib64/cmake/Boost-1.78.0/BoostConfigVersion.cmake /usr/lib64/cmake/BoostDetectToolset-1.78.0.cmake /usr/lib64/cmake/boost_atomic-1.78.0/boost_atomic-config-version.cmake /usr/lib64/cmake/boost_atomic-1.78.0/boost_atomic-config.cmake /usr/lib64/cmake/boost_atomic-1.78.0/libboost_atomic-variant-shared.cmake /usr/lib64/cmake/boost_atomic-1.78.0/libboost_atomic-variant-static.cmake /usr/lib64/cmake/boost_filesystem-1.78.0/boost_filesystem-config-version.cmake /usr/lib64/cmake/boost_filesystem-1.78.0/boost_filesystem-config.cmake /usr/lib64/cmake/boost_filesystem-1.78.0/libboost_filesystem-variant-shared.cmake /usr/lib64/cmake/boost_filesystem-1.78.0/libboost_filesystem-variant-static.cmake /usr/lib64/cmake/boost_headers-1.78.0/boost_headers-config-version.cmake /usr/lib64/cmake/boost_headers-1.78.0/boost_headers-config.cmake /usr/lib64/cmake/boost_serialization-1.78.0/boost_serialization-config-version.cmake /usr/lib64/cmake/boost_serialization-1.78.0/boost_serialization-config.cmake /usr/lib64/cmake/boost_serialization-1.78.0/libboost_serialization-variant-shared.cmake /usr/lib64/cmake/boost_serialization-1.78.0/libboost_serialization-variant-static.cmake /usr/lib64/cmake/boost_system-1.78.0/boost_system-config-version.cmake /usr/lib64/cmake/boost_system-1.78.0/boost_system-config.cmake /usr/lib64/cmake/boost_system-1.78.0/libboost_system-variant-shared.cmake /usr/lib64/cmake/boost_system-1.78.0/libboost_system-variant-static.cmake CMakeCache.txt CMakeFiles/3.25.2/CMakeCCompiler.cmake CMakeFiles/3.25.2/CMakeCXXCompiler.cmake CMakeFiles/3.25.2/CMakeSystem.cmake
   pool = console
 
 
 #############################################
 # A missing CMake input file is not an error.
 
-build /home/aitor/Projects/kubeshm-tests/CMakeLists.txt /home/aitor/Projects/kubeshm-tests/src/CMakeLists.txt /opt/clion-2023.1.1/bin/cmake/linux/x64/share/cmake-3.25/Modules/CMakeCInformation.cmake /opt/clion-2023.1.1/bin/cmake/linux/x64/share/cmake-3.25/Modules/CMakeCXXInformation.cmake /opt/clion-2023.1.1/bin/cmake/linux/x64/share/cmake-3.25/Modules/CMakeCommonLanguageInclude.cmake /opt/clion-2023.1.1/bin/cmake/linux/x64/share/cmake-3.25/Modules/CMakeGenericSystem.cmake /opt/clion-2023.1.1/bin/cmake/linux/x64/share/cmake-3.25/Modules/CMakeInitializeConfigs.cmake /opt/clion-2023.1.1/bin/cmake/linux/x64/share/cmake-3.25/Modules/CMakeLanguageInformation.cmake /opt/clion-2023.1.1/bin/cmake/linux/x64/share/cmake-3.25/Modules/CMakeSystemSpecificInformation.cmake /opt/clion-2023.1.1/bin/cmake/linux/x64/share/cmake-3.25/Modules/CMakeSystemSpecificInitialize.cmake /opt/clion-2023.1.1/bin/cmake/linux/x64/share/cmake-3.25/Modules/Compiler/CMakeCommonCompilerMacros.cmake /opt/clion-2023.1.1/bin/cmake/linux/x64/share/cmake-3.25/Modules/Compiler/GNU-C.cmake /opt/clion-2023.1.1/bin/cmake/linux/x64/share/cmake-3.25/Modules/Compiler/GNU-CXX.cmake /opt/clion-2023.1.1/bin/cmake/linux/x64/share/cmake-3.25/Modules/Compiler/GNU.cmake /opt/clion-2023.1.1/bin/cmake/linux/x64/share/cmake-3.25/Modules/Platform/Linux-GNU-C.cmake /opt/clion-2023.1.1/bin/cmake/linux/x64/share/cmake-3.25/Modules/Platform/Linux-GNU-CXX.cmake /opt/clion-2023.1.1/bin/cmake/linux/x64/share/cmake-3.25/Modules/Platform/Linux-GNU.cmake /opt/clion-2023.1.1/bin/cmake/linux/x64/share/cmake-3.25/Modules/Platform/Linux.cmake /opt/clion-2023.1.1/bin/cmake/linux/x64/share/cmake-3.25/Modules/Platform/UnixPaths.cmake CMakeCache.txt CMakeFiles/3.25.2/CMakeCCompiler.cmake CMakeFiles/3.25.2/CMakeCXXCompiler.cmake CMakeFiles/3.25.2/CMakeSystem.cmake: phony
+build /home/aitor/Projects/kubeshm-tests/CMakeLists.txt /home/aitor/Projects/kubeshm-tests/src/CMakeLists.txt /opt/clion-2023.1.1/bin/cmake/linux/x64/share/cmake-3.25/Modules/CMakeCInformation.cmake /opt/clion-2023.1.1/bin/cmake/linux/x64/share/cmake-3.25/Modules/CMakeCXXInformation.cmake /opt/clion-2023.1.1/bin/cmake/linux/x64/share/cmake-3.25/Modules/CMakeCommonLanguageInclude.cmake /opt/clion-2023.1.1/bin/cmake/linux/x64/share/cmake-3.25/Modules/CMakeGenericSystem.cmake /opt/clion-2023.1.1/bin/cmake/linux/x64/share/cmake-3.25/Modules/CMakeInitializeConfigs.cmake /opt/clion-2023.1.1/bin/cmake/linux/x64/share/cmake-3.25/Modules/CMakeLanguageInformation.cmake /opt/clion-2023.1.1/bin/cmake/linux/x64/share/cmake-3.25/Modules/CMakeSystemSpecificInformation.cmake /opt/clion-2023.1.1/bin/cmake/linux/x64/share/cmake-3.25/Modules/CMakeSystemSpecificInitialize.cmake /opt/clion-2023.1.1/bin/cmake/linux/x64/share/cmake-3.25/Modules/Compiler/CMakeCommonCompilerMacros.cmake /opt/clion-2023.1.1/bin/cmake/linux/x64/share/cmake-3.25/Modules/Compiler/GNU-C.cmake /opt/clion-2023.1.1/bin/cmake/linux/x64/share/cmake-3.25/Modules/Compiler/GNU-CXX.cmake /opt/clion-2023.1.1/bin/cmake/linux/x64/share/cmake-3.25/Modules/Compiler/GNU.cmake /opt/clion-2023.1.1/bin/cmake/linux/x64/share/cmake-3.25/Modules/FindBoost.cmake /opt/clion-2023.1.1/bin/cmake/linux/x64/share/cmake-3.25/Modules/FindPackageHandleStandardArgs.cmake /opt/clion-2023.1.1/bin/cmake/linux/x64/share/cmake-3.25/Modules/FindPackageMessage.cmake /opt/clion-2023.1.1/bin/cmake/linux/x64/share/cmake-3.25/Modules/Platform/Linux-GNU-C.cmake /opt/clion-2023.1.1/bin/cmake/linux/x64/share/cmake-3.25/Modules/Platform/Linux-GNU-CXX.cmake /opt/clion-2023.1.1/bin/cmake/linux/x64/share/cmake-3.25/Modules/Platform/Linux-GNU.cmake /opt/clion-2023.1.1/bin/cmake/linux/x64/share/cmake-3.25/Modules/Platform/Linux.cmake /opt/clion-2023.1.1/bin/cmake/linux/x64/share/cmake-3.25/Modules/Platform/UnixPaths.cmake /usr/lib64/cmake/Boost-1.78.0/BoostConfig.cmake /usr/lib64/cmake/Boost-1.78.0/BoostConfigVersion.cmake /usr/lib64/cmake/BoostDetectToolset-1.78.0.cmake /usr/lib64/cmake/boost_atomic-1.78.0/boost_atomic-config-version.cmake /usr/lib64/cmake/boost_atomic-1.78.0/boost_atomic-config.cmake /usr/lib64/cmake/boost_atomic-1.78.0/libboost_atomic-variant-shared.cmake /usr/lib64/cmake/boost_atomic-1.78.0/libboost_atomic-variant-static.cmake /usr/lib64/cmake/boost_filesystem-1.78.0/boost_filesystem-config-version.cmake /usr/lib64/cmake/boost_filesystem-1.78.0/boost_filesystem-config.cmake /usr/lib64/cmake/boost_filesystem-1.78.0/libboost_filesystem-variant-shared.cmake /usr/lib64/cmake/boost_filesystem-1.78.0/libboost_filesystem-variant-static.cmake /usr/lib64/cmake/boost_headers-1.78.0/boost_headers-config-version.cmake /usr/lib64/cmake/boost_headers-1.78.0/boost_headers-config.cmake /usr/lib64/cmake/boost_serialization-1.78.0/boost_serialization-config-version.cmake /usr/lib64/cmake/boost_serialization-1.78.0/boost_serialization-config.cmake /usr/lib64/cmake/boost_serialization-1.78.0/libboost_serialization-variant-shared.cmake /usr/lib64/cmake/boost_serialization-1.78.0/libboost_serialization-variant-static.cmake /usr/lib64/cmake/boost_system-1.78.0/boost_system-config-version.cmake /usr/lib64/cmake/boost_system-1.78.0/boost_system-config.cmake /usr/lib64/cmake/boost_system-1.78.0/libboost_system-variant-shared.cmake /usr/lib64/cmake/boost_system-1.78.0/libboost_system-variant-static.cmake CMakeCache.txt CMakeFiles/3.25.2/CMakeCCompiler.cmake CMakeFiles/3.25.2/CMakeCXXCompiler.cmake CMakeFiles/3.25.2/CMakeSystem.cmake: phony
 
 
 #############################################
