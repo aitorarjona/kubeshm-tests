@@ -18,6 +18,7 @@ struct ProxyRequest {
     std::string key;
     unsigned long range0;
     unsigned long range1;
+    std::string replyQueue;
 
     template<typename Archive>
     void serialize(Archive &ar, const unsigned int version) {

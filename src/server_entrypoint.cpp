@@ -1,15 +1,7 @@
-#include <boost/asio.hpp>
-#include <iostream>
-
-#include "proxy/server.h"
+#include "proxy/proxy_server.h"
 
 int main(int argc, char *argv[]) {
-    std::remove(SOCKET_PATH.data());
-    std::cout << "Starting server on " << SOCKET_PATH << std::endl;
-
-    // create gedsproxy::Server instance
     gedsproxy::Server server;
-    server.run();
-
+    gedsproxy::run_ipc_queues(server);
     return 0;
 }
