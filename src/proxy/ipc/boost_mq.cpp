@@ -37,12 +37,10 @@ void gedsproxy::BoostIPCQueueServer::run() {
 //            std::cout << request.range1 << std::endl;
             std::cout << request.replyQueue << std::endl;
 
-            ProxyResponse response{
-                .message = "ok\0"
-            };
+            std::unique_ptr<ProxyResponse> response;
             switch (request.operation) {
             case OPEN:
-//                response = this->server_.handle_open(request);
+                response = this->server_.handle_open(request);
                 break;
             case CLOSE:
 //                response = this->server_.handle_close(request);
@@ -60,7 +58,7 @@ void gedsproxy::BoostIPCQueueServer::run() {
             }
             // get response queue from map
             replyQueues_.find(request.replyQueue)
-                ->second->send(&response, sizeof(ProxyResponse), 0);
+                ->second->send(response.get(), sizeof(ProxyResponse), 0);
         } catch (boost::interprocess::interprocess_exception &ex) {
             std::cout << ex.what() << std::endl;
             throw ex;
@@ -75,9 +73,9 @@ gedsproxy::BoostIPCQueueClient::BoostIPCQueueClient()
     try {
         this->proxy_mq = new boost::interprocess::message_queue(
             boost::interprocess::open_only, PROXY_QUEUE_NAME.c_str());
-        boost::interprocess::message_queue::remove("client_queue");
+//        boost::interprocess::message_queue::remove("client_queue");
         this->client_mq = new boost::interprocess::message_queue(
-            boost::interprocess::create_only, "client_queue", 100, sizeof(ProxyResponse));
+            boost::interprocess::open_or_create, "client_queue", 100, sizeof(ProxyResponse));
     } catch (boost::interprocess::interprocess_exception &ex) {
         std::cout << ex.what() << std::endl;
         throw ex;

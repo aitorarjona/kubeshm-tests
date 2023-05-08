@@ -23,7 +23,7 @@ void gedsproxy::run_ipc_queues(gedsproxy::Server &proxyServer) {
 std::unique_ptr<gedsproxy::ProxyResponse> gedsproxy::Server::handle_open(ProxyRequest &request) {
     std::cout << "Proxy Server handle_open" << std::endl;
     ProxyResponse response {
-        .message = "ok"
+        .message = "ok\0"
     };
     return std::make_unique<ProxyResponse>(response);
 
