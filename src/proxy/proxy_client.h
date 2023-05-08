@@ -7,23 +7,20 @@
 #ifndef KUBESHM_TESTS_CLIENT_H
 #define KUBESHM_TESTS_CLIENT_H
 
-using boost::asio::local::stream_protocol;
 
 namespace gedsproxy {
     class Client {
     private:
-        boost::asio::basic_stream_socket<stream_protocol> *sock;
-        boost::asio::io_context *io_context;
+        std::unique_ptr<ProxyIPCClient> ipcClient;
     public:
         // define GEDSProxy constructor
-        Client();
+        explicit Client(std::unique_ptr<ProxyIPCClient> ipcClient);
 
         // define GEDSProxy destructor
-        ~Client();
+        ~Client() = default;
 
-        void connect();
+        void open(const std::string& pathname, int flags);
 
-        ProxyResponse& call(ProxyRequest& request);
     };
 }
 

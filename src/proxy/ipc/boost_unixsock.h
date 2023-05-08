@@ -9,13 +9,15 @@
 #include <boost/iostreams/stream.hpp>
 #include <iostream>
 
-#include "protocol.h"
-#include "proxy_server.h"
+#include "../protocol.h"
+#include "../proxy_server.h"
 
 #ifndef KUBESHM_TESTS_UNIXSOCK_SERVER_H
 #define KUBESHM_TESTS_UNIXSOCK_SERVER_H
 
 const std::string SOCKET_PATH = "/dev/shm/asio.localstream.socket";
+
+using boost::asio::local::stream_protocol;
 
 
 namespace gedsproxy {
@@ -48,6 +50,12 @@ namespace gedsproxy {
 
         void handle_accept(std::shared_ptr<BoostAFUnixSession> session,
                            const boost::system::error_code &error);
+    };
+
+    class BoostAFUnixClient {
+    private:
+        boost::asio::basic_stream_socket<stream_protocol> *sock;
+        boost::asio::io_context *io_context;
     };
 }
 

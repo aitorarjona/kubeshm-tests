@@ -5,9 +5,9 @@
 #include <boost/iostreams/stream.hpp>
 #include <iostream>
 
-#include "protocol.h"
-#include "proxy_server.h"
-#include "unixsock_server.h"
+#include "../protocol.h"
+#include "../proxy_server.h"
+#include "boost_unixsock.h"
 
 gedsproxy::BoostAFUnixSession::BoostAFUnixSession(gedsproxy::Server &server, boost::asio::io_context &io_context)
     : server_(server), socket_(io_context) {}
@@ -28,11 +28,11 @@ void gedsproxy::BoostAFUnixSession::handle_read(const boost::system::error_code 
                                                 size_t bytes_transferred) {
     std::cout << "--- BoostAFUnixSession handle_read ---" << std::endl;
     if (!error) {
-        ProxyRequest request;
+        ProxyRequest request{};
         {
             boost::iostreams::stream<boost::iostreams::array_source> is(data_);
             boost::archive::binary_iarchive ia(is);
-            ia >> request;
+//            ia >> request;
         }
 
         std::cout << request.key << std::endl;
