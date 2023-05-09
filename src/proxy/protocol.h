@@ -41,6 +41,7 @@ namespace gedsproxy {
 
     class ProxyIPCClient {
     public:
+        virtual ~ProxyIPCClient() = default;
         virtual std::unique_ptr<ProxyResponse> call(ProxyRequest& request) = 0;
     };
 }

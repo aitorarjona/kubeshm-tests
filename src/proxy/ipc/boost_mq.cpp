@@ -6,13 +6,13 @@
 #include <iostream>
 
 gedsproxy::BoostIPCQueueServer::BoostIPCQueueServer(gedsproxy::Server &proxyServer)
-    : server_(proxyServer), mq_(nullptr) {}
+        : server_(proxyServer), mq_(nullptr) {}
 
 void gedsproxy::BoostIPCQueueServer::setup() {
     try {
         boost::interprocess::message_queue::remove(PROXY_QUEUE_NAME.c_str());
         this->mq_ = new boost::interprocess::message_queue(
-            boost::interprocess::create_only, PROXY_QUEUE_NAME.c_str(), 100, sizeof(ProxyRequest));
+                boost::interprocess::create_only, PROXY_QUEUE_NAME.c_str(), 100, sizeof(ProxyRequest));
     } catch (boost::interprocess::interprocess_exception &ex) {
         std::cout << ex.what() << std::endl;
         throw ex;
@@ -21,7 +21,7 @@ void gedsproxy::BoostIPCQueueServer::setup() {
 
 void gedsproxy::BoostIPCQueueServer::run() {
     // create ProxyRequest shared pointer
-    ProxyRequest request;
+    gedsproxy::ProxyRequest request;
 
     unsigned int priority;
     boost::interprocess::message_queue::size_type recvd_size;
@@ -39,12 +39,12 @@ void gedsproxy::BoostIPCQueueServer::run() {
 
             std::unique_ptr<ProxyResponse> response;
             switch (request.operation) {
-            case OPEN:
-                response = this->server_.handle_open(request);
-                break;
-            case CLOSE:
+                case OPEN:
+                    response = this->server_.handle_open(request);
+                    break;
+                case CLOSE:
 //                response = this->server_.handle_close(request);
-                break;
+                    break;
             }
 
 //            std::cout << response->message << std::endl;
@@ -53,12 +53,12 @@ void gedsproxy::BoostIPCQueueServer::run() {
             if (replyQueues_.find(request.replyQueue) == replyQueues_.end()) {
                 // if it is not, open response queue
                 replyQueues_[request.replyQueue] =
-                    std::make_unique<boost::interprocess::message_queue>(
-                        boost::interprocess::open_only, request.replyQueue);
+                        std::make_unique<boost::interprocess::message_queue>(
+                                boost::interprocess::open_only, request.replyQueue);
             }
             // get response queue from map
             replyQueues_.find(request.replyQueue)
-                ->second->send(response.get(), sizeof(ProxyResponse), 0);
+                    ->second->send(response.get(), sizeof(ProxyResponse), 0);
         } catch (boost::interprocess::interprocess_exception &ex) {
             std::cout << ex.what() << std::endl;
             throw ex;
@@ -69,13 +69,13 @@ void gedsproxy::BoostIPCQueueServer::run() {
 //////////////////////////////////////////
 
 gedsproxy::BoostIPCQueueClient::BoostIPCQueueClient()
-    : proxy_mq(nullptr), client_mq(nullptr) {
+        : proxy_mq(nullptr), client_mq(nullptr) {
     try {
         this->proxy_mq = new boost::interprocess::message_queue(
-            boost::interprocess::open_only, PROXY_QUEUE_NAME.c_str());
-//        boost::interprocess::message_queue::remove("client_queue");
+                boost::interprocess::open_only, PROXY_QUEUE_NAME.c_str());
+        boost::interprocess::message_queue::remove("client_queue");
         this->client_mq = new boost::interprocess::message_queue(
-            boost::interprocess::open_or_create, "client_queue", 100, sizeof(ProxyResponse));
+                boost::interprocess::open_or_create, "client_queue", 100, sizeof(ProxyResponse));
     } catch (boost::interprocess::interprocess_exception &ex) {
         std::cout << ex.what() << std::endl;
         throw ex;
@@ -88,7 +88,7 @@ std::unique_ptr<gedsproxy::ProxyResponse> gedsproxy::BoostIPCQueueClient::call(P
         this->proxy_mq->send(&request, sizeof(ProxyRequest), 0);
         unsigned int priority;
         boost::interprocess::message_queue::size_type recvd_size;
-        ProxyResponse response;
+        ProxyResponse response{};
         std::cout << "Waiting for a response..." << std::endl;
         this->client_mq->receive(&response, sizeof(ProxyResponse), recvd_size, priority);
         std::cout << "Response received" << std::endl;

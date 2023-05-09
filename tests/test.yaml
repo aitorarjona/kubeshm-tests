@@ -1,0 +1,20 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: kube-shm-test
+spec:
+  containers:
+    - name: main
+      image: aitorarjona/kubeshm-tests:latest
+      imagePullPolicy: Always
+      volumeMounts:
+        - name: shm
+          mountPath: /dev/shm
+  volumes:
+    - name: shm
+      emptyDir:
+        medium: Memory
+        sizeLimit: 512Mi
+    - name: tmp
+      emptyDir:
+        sizeLimit: 512Mi

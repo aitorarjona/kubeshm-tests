@@ -28,12 +28,13 @@ std::unique_ptr<gedsproxy::ProxyResponse> gedsproxy::Server::handle_open(ProxyRe
     return std::make_unique<ProxyResponse>(response);
 
     // check if the file is already open
+//    ProxyResponse response{};
 //    if (this->open_shm_files_.find(request.key) != this->open_shm_files_.end()) {
 //        // if it is, put "ok" in response message
-//        response.message = "ok";
+//        strcpy(response.message, "ok\0");
 //    } else {
 //        // if it is not, create the shared memory object
-//        int fd = shm_open(request.key.c_str(), O_CREAT | O_EXCL | O_RDWR, S_IRUSR | S_IWUSR);
+//        int fd = shm_open(request.key, O_CREAT | O_EXCL | O_RDWR, S_IRUSR | S_IWUSR | S_IRGRP | S_IWGRP);
 //        if (fd == -1) {
 //            perror("cagaste 1");
 //            exit(-1);
@@ -61,8 +62,8 @@ std::unique_ptr<gedsproxy::ProxyResponse> gedsproxy::Server::handle_open(ProxyRe
 //        this->open_shm_files_.insert({request.key, fd});
 //        response.message = "ok";
 //    }
-//
-//    return std::make_unique<ProxyResponse>(response);
+
+    return std::make_unique<ProxyResponse>(response);
 }
 
 std::unique_ptr<gedsproxy::ProxyResponse> gedsproxy::Server::handle_close(ProxyRequest &request) {
