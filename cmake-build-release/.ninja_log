@@ -1,13 +1,13 @@
 # ninja log v5
-0	1117	1683641972318968688	src/CMakeFiles/server.dir/server_entrypoint.cpp.o	9f56f04d44f39b0a
-2	3921	1683641975120983051	src/CMakeFiles/client.dir/write_example.cpp.o	7fd4bc26c0691ea9
 2	4203	1683641975402984496	src/CMakeFiles/client.dir/proxy/proxy_client.cpp.o	c0ae2bb1409315ba
 1	5161	1683641976360989407	src/CMakeFiles/server.dir/proxy/ipc/boost_mq.cpp.o	a8105dd2c7b19928
-1	5582	1683641976781991565	src/CMakeFiles/server.dir/proxy/proxy_client.cpp.o	474d8664b32a0037
-2	6035	1683641977235993892	src/CMakeFiles/client.dir/proxy/ipc/boost_mq.cpp.o	906030bb0aa7dd1d
-2	6920	1683641978120998428	src/CMakeFiles/client.dir/proxy/proxy_server.cpp.o	799bcd6c8906f82d
+0	1117	1683641972318968688	src/CMakeFiles/server.dir/server_entrypoint.cpp.o	9f56f04d44f39b0a
 1	6934	1683641978133998495	src/CMakeFiles/server.dir/proxy/proxy_server.cpp.o	2ff020141a60c1f
+2	6920	1683641978120998428	src/CMakeFiles/client.dir/proxy/proxy_server.cpp.o	799bcd6c8906f82d
 1	6963	1683641978163998649	src/CMakeFiles/server.dir/proxy/ipc/boost_unixsock.cpp.o	b5000de5c45665c9
+2	6035	1683641977235993892	src/CMakeFiles/client.dir/proxy/ipc/boost_mq.cpp.o	906030bb0aa7dd1d
+1	5582	1683641976781991565	src/CMakeFiles/server.dir/proxy/proxy_client.cpp.o	474d8664b32a0037
 6963	7031	1683641978231998997	src/server	6704810a07f62adc
 2	7033	1683641978233999007	src/CMakeFiles/client.dir/proxy/ipc/boost_unixsock.cpp.o	12343806df9745b2
+2	3921	1683641975120983051	src/CMakeFiles/client.dir/write_example.cpp.o	7fd4bc26c0691ea9
 7033	7100	1683641978300999351	src/client	8bce2a0519b18665

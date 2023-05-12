@@ -5,11 +5,21 @@ metadata:
 spec:
   containers:
     - name: main
-      image: aitorarjona/kubeshm-tests:latest
+      image: aitorarjona/kubeshm-tests-1:latest
       imagePullPolicy: Always
       volumeMounts:
         - name: shm
           mountPath: /dev/shm
+        - name: tmp
+          mountPath: /tmp
+      resources:
+        requests:
+          memory: "512Mi"
+          cpu: "100m"
+        limits:
+          memory: "512Mi"
+          cpu: "100m"
+      command: ["/bin/sh", "-ec", "sleep 1000"]
   volumes:
     - name: shm
       emptyDir:

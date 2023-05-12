@@ -28,7 +28,7 @@ add_executable(
         proxy/ipc/boost_unixsock.h
         proxy/ipc/boost_mq.cpp
         proxy/ipc/boost_mq.h
-)
+        ../tests/4/client.cpp)
 
 #target_link_libraries(geds
 #        PRIVATE

@@ -16,5 +16,3 @@ FROM ubuntu:22.04
 WORKDIR /app
 
 COPY --from=builder /app/client /app/master ./
-
-CMD ["/bin/sh", "-ec", "sleep 1000"]

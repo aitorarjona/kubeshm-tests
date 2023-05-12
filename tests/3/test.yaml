@@ -1,0 +1,49 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: geds-server
+spec:
+  containers:
+    - image: aitorarjona/kubeshm-test-3:latest
+      imagePullPolicy: Always
+      name: geds-server
+      command: [ "/bin/sh", "-ec", "sleep 1000" ]
+      volumeMounts:
+        - name: dev-shm
+          mountPath: /dev/shm
+        - name: tmp
+          mountPath: /tmp
+  volumes:
+    - name: dev-shm
+      hostPath:
+        path: /dev/shm
+        type: Directory
+    - name: tmp
+      hostPath:
+        path: /tmp/geds
+        type: DirectoryOrCreate
+---
+apiVersion: v1
+kind: Pod
+metadata:
+  name: geds-client
+spec:
+  containers:
+    - image: aitorarjona/kubeshm-test-3:latest
+      imagePullPolicy: Always
+      name: geds-client
+      command: [ "/bin/sh", "-ec", "sleep 1000" ]
+      volumeMounts:
+        - name: dev-shm
+          mountPath: /dev/shm
+        - name: tmp
+          mountPath: /tmp
+  volumes:
+    - name: dev-shm
+      hostPath:
+        path: /dev/shm
+        type: Directory
+    - name: tmp
+      hostPath:
+        path: /tmp/geds
+        type: DirectoryOrCreate
